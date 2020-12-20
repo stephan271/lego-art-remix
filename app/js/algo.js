@@ -40,6 +40,7 @@ function getPixelArrayFromCanvas(canvas) {
 }
 
 function drawPixelsOnCanvas(pixels, canvas) {
+  console.log({pixels})
     const context = canvas.getContext("2d");
 
     const imageData = context.createImageData(canvas.width, canvas.height);
