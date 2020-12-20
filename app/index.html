@@ -43,11 +43,11 @@
             <b>Target Resolution:</b>
             <div style="width: 100%">
               <div>Width: <span id="width-text">48</span></div>
-              <input type="range" id="width-slider" name="points" min="16" max="96" step="16" value="48" style="width: 100%">
+              <input type="range" id="width-slider" name="points" min="16" max="224" step="16" value="224" style="width: 100%">
             </div>
             <div style="width: 100%">
               <div>Height: <span id="height-text">48</span></div>
-              <input type="range" id="height-slider" name="points" min="16" max="96" step="16" value="48" style="width: 100%">
+              <input type="range" id="height-slider" name="points" min="16" max="224" step="16" value="224" style="width: 100%">
             </div>
           </div>
           <div style="margin-left: 4px; margin-top: 10px">
@@ -70,6 +70,8 @@
               </p>
             </div>
           </small>
+          <h1>Debug</h1>
+          <div id="predictions"></div>
         </div>
       </div>
 
@@ -362,9 +364,14 @@
   </script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/onnxjs/dist/onnx.min.js"></script>
+  <script src="js/ndarray-browser-min.js"></script>
   <script src="js/bricklink-colors.js"></script>
   <script src="js/stud-maps.js"></script>
   <script src="js/algo.js"></script>
+  <script src="js/depth-map-estimation.js"></script>
+  <!-- TODO: Remove -->
+  <script src="js/temp-resnet-example.js"></script>
   <script src="js/index.js"></script>
 
   <!-- Optional JavaScript -->

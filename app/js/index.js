@@ -1183,7 +1183,7 @@ document
 
 function handleInputImage(e) {
     const reader = new FileReader();
-    reader.onload = function(event) {
+    reader.onload = async function(event) {
         inputImage = new Image();
         inputImage.onload = function() {
             inputCanvas.width = inputImage.width;
@@ -1197,6 +1197,8 @@ function handleInputImage(e) {
         setTimeout(() => {
             runStep1();
         }, 50); // TODO: find better way to check that input is finished
+
+        await runExample();
 
         perfLoggingDatabase
             .ref("input-image-count/total")
