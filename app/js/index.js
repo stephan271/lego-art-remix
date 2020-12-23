@@ -162,7 +162,6 @@ function enableDepth() {
     [...document.getElementsByClassName("3d-selector-tabs")].forEach(
         tabsList => (tabsList.hidden = false)
     );
-    document.getElementById("header-text-3d").hidden = false;
     document.getElementById("enable-depth-button-container").hidden = true;
 
     document.getElementById("download-instructions-button").innerHTML =
