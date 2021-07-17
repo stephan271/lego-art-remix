@@ -181,7 +181,7 @@ let targetResolution = [
     Number(document.getElementById("height-slider").value)
 ];
 const SCALING_FACTOR = 40;
-const PLATE_WIDTH = 16;
+const PLATE_WIDTH = 12;
 
 window.addEventListener("resize", () => {
     [step4Canvas].forEach(canvas => {
@@ -1749,7 +1749,7 @@ function runStep4(asyncCallback) {
 }
 
 function addWaterMark(pdf, isHighQuality) {
-    for (let i = 0; i < pdf.internal.getNumberOfPages(); i++) {
+/*     for (let i = 0; i < pdf.internal.getNumberOfPages(); i++) {
         pdf.setPage(i + 1);
         pdf.setFontSize(isHighQuality ? 20 : 10);
         pdf.setTextColor(200);
@@ -1763,7 +1763,7 @@ function addWaterMark(pdf, isHighQuality) {
             pdf.internal.pageSize.height * 0.3 + 10,
             VERSION_NUMBER
         );
-    }
+    } */
 }
 
 function sleep(ms) {
