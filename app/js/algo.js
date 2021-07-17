@@ -26,7 +26,7 @@ function inverseHex(hex) {
 }
 
 function uuidv4() {
-    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(c) {
+    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
         var r = (Math.random() * 16) | 0,
             v = c == "x" ? r : (r & 0x3) | 0x8;
         return v.toString(16);
@@ -234,10 +234,10 @@ function correctPixelsForAvailableStuds(
             overridePixelArray[i + 2] != null;
         const originalRGB = wasOverridden
             ? [
-                  overridePixelArray[i],
-                  overridePixelArray[i + 1],
-                  overridePixelArray[i + 2]
-              ]
+                overridePixelArray[i],
+                overridePixelArray[i + 1],
+                overridePixelArray[i + 2]
+            ]
             : [originalPixels[i], originalPixels[i + 1], originalPixels[i + 2]];
         const alignedRGB = [
             anchorAlignedPixels[i],
@@ -276,18 +276,18 @@ function correctPixelsForAvailableStuds(
                 ((row + col) % 3) * TIEBREAKER_RATIO +
                 ((row + col) % 4) * TIEBREAKER_RATIO * TIEBREAKER_RATIO +
                 ((row + col) % 5) *
-                    TIEBREAKER_RATIO *
-                    TIEBREAKER_RATIO *
-                    TIEBREAKER_RATIO;
+                TIEBREAKER_RATIO *
+                TIEBREAKER_RATIO *
+                TIEBREAKER_RATIO;
         } else if (tieResolutionMethod === "cascadingnoisymod") {
             tiebreakFactor *=
                 ((row + col) % 2) +
                 ((row + col) % 3) * TIEBREAKER_RATIO +
                 ((row + col) % 4) * TIEBREAKER_RATIO * TIEBREAKER_RATIO +
                 Math.random() *
-                    TIEBREAKER_RATIO *
-                    TIEBREAKER_RATIO *
-                    TIEBREAKER_RATIO;
+                TIEBREAKER_RATIO *
+                TIEBREAKER_RATIO *
+                TIEBREAKER_RATIO;
         }
         problematicPixelsMap[alignedHex].push({
             index: i,
@@ -548,31 +548,36 @@ function drawStudCountForContext(
 ) {
     const radius = scalingFactor / 2;
     ctx.font = `${scalingFactor / 2}px Arial`;
+    let yoff = 0;
     availableStudHexList.forEach((pixelHex, i) => {
-        const number = i + 1;
-        ctx.beginPath();
-        const x = horizontalOffset;
-        const y = verticalOffset + radius * 2.5 * number;
-        ctx.arc(x, y, radius, 0, 2 * Math.PI);
-        ctx.fillStyle = pixelHex;
-        ctx.fill();
-        ctx.strokeStyle = inverseHex(pixelHex);
-        ctx.stroke();
-        ctx.fillStyle = inverseHex(pixelHex);
-        ctx.fillText(
-            number,
-            x - (scalingFactor * (1 + Math.floor(number / 2) / 6)) / 8,
-            y + scalingFactor / 8
-        );
-        ctx.fillStyle = "#000000";
-        ctx.fillText(`X ${studMap[pixelHex] || 0}`, x + radius * 1.5, y);
-        ctx.font = `${scalingFactor / 2.5}px Arial`;
-        ctx.fillText(
-            HEX_TO_COLOR_NAME[pixelHex] || pixelHex,
-            x + radius * 1.5,
-            y + scalingFactor / 2.5
-        );
-        ctx.font = `${scalingFactor / 2}px Arial`;
+        // console.log("studmap,i:",studMap[pixelHex],pixelHex)
+        if (studMap[pixelHex] > 0) {
+            const number = i + 1;
+            yoff += 1
+            ctx.beginPath();
+            const x = horizontalOffset;
+            const y = verticalOffset + radius * 2.5 * yoff;
+            ctx.arc(x, y, radius, 0, 2 * Math.PI);
+            ctx.fillStyle = pixelHex;
+            ctx.fill();
+            ctx.strokeStyle = inverseHex(pixelHex);
+            ctx.stroke();
+            ctx.fillStyle = inverseHex(pixelHex);
+            ctx.fillText(
+                number,
+                x - (scalingFactor * (1 + Math.floor(number / 2) / 6)) / 8,
+                y + scalingFactor / 8
+            );
+            ctx.fillStyle = "#000000";
+            ctx.fillText(`X ${studMap[pixelHex] || 0}`, x + radius * 1.5, y);
+            ctx.font = `${scalingFactor / 2.5}px Arial`;
+            ctx.fillText(
+                HEX_TO_COLOR_NAME[pixelHex] || pixelHex,
+                x + radius * 1.5,
+                y + scalingFactor / 2.5
+            );
+            ctx.font = `${scalingFactor / 2}px Arial`;
+        }
     });
 
     ctx.lineWidth = 5;
@@ -646,8 +651,8 @@ function generateInstructionTitlePage(
         finalImageCanvas.width,
         finalImageCanvas.height,
         legendHorizontalOffset +
-            legendSquareSide / 4 +
-            (legendSquareSide * width) / plateWidth,
+        legendSquareSide / 4 +
+        (legendSquareSide * width) / plateWidth,
         legendVerticalOffset,
         (legendSquareSide * width) / plateWidth,
         legendSquareSide * ((numPlates * plateWidth) / width)
@@ -759,9 +764,9 @@ function generateInstructionPage(
             ctx.fillText(
                 studToNumber[pixelHex],
                 x -
-                    (scalingFactor *
-                        (1 + Math.floor(studToNumber[pixelHex] / 2) / 6)) /
-                        8,
+                (scalingFactor *
+                    (1 + Math.floor(studToNumber[pixelHex] / 2) / 6)) /
+                8,
                 y + scalingFactor / 8
             );
         }
@@ -980,10 +985,10 @@ function generateDepthInstructionTitlePage(
     const betweenLevelPicturePadding = pictureHeight * 0.2;
     canvas.height = Math.max(
         pictureHeight * 1.5 +
-            (pictureHeight + betweenLevelPicturePadding) *
-                (usedPlatesMatrices[0].length - 1),
+        (pictureHeight + betweenLevelPicturePadding) *
+        (usedPlatesMatrices[0].length - 1),
         pictureHeight * 0.4 +
-            sortedDepthParts.length * (scalingFactor / 2) * 2.5
+        sortedDepthParts.length * (scalingFactor / 2) * 2.5
     );
     canvas.width = pictureWidth * 2;
 
@@ -1023,8 +1028,8 @@ function generateDepthInstructionTitlePage(
         finalDepthImageCanvas.width,
         finalDepthImageCanvas.height,
         legendHorizontalOffset +
-            legendSquareSide / 4 +
-            (legendSquareSide * targetResolution[0]) / plateWidth,
+        legendSquareSide / 4 +
+        (legendSquareSide * targetResolution[0]) / plateWidth,
         legendVerticalOffset,
         (legendSquareSide * targetResolution[0]) / plateWidth,
         legendSquareSide * ((numPlates * plateWidth) / targetResolution[0])
@@ -1080,8 +1085,8 @@ function generateDepthInstructionPage(
     const betweenLevelPicturePadding = pictureHeight * 0.2;
     canvas.height = Math.max(
         pictureHeight * 1.5 +
-            (pictureHeight + betweenLevelPicturePadding) *
-                (perDepthLevelMatrices.length - 1),
+        (pictureHeight + betweenLevelPicturePadding) *
+        (perDepthLevelMatrices.length - 1),
         pictureHeight * 0.4 + sortedDepthParts.length * radius * 2.5
     );
     canvas.width = pictureWidth * 2;
